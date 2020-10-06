@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName '7.72.0'
+        ndkVersion '21.3.6528147'
+        externalNativeBuild {
+            ndkBuild {
+                arguments "-j${Runtime.runtime.availableProcessors()}"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig false
+        prefabPublishing true
+    }
+
+    externalNativeBuild {
+        ndkBuild.path 'src/main/native/Android.mk'
+    }
+
+    prefab {
+        curl_static {
+            headers "src/main/native/curl/include"
+        }
+    }
+}
