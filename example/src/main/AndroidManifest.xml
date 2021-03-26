@@ -6,6 +6,7 @@
 
     <application
         android:allowBackup="true"
+        android:hasCode="false"
         android:label="curl"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"

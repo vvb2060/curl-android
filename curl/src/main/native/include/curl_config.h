@@ -16,6 +16,9 @@
 /* Default SSL backend */
 /* #undef CURL_DEFAULT_SSL_BACKEND */
 
+/* disable alt-svc */
+/* #undef CURL_DISABLE_ALTSVC */
+
 /* to disable cookies support */
 /* #undef CURL_DISABLE_COOKIES */
 
@@ -33,6 +36,9 @@
 
 /* to disable FTP */
 #define CURL_DISABLE_FTP 1
+
+/* to disable curl_easy_options */
+/* #undef CURL_DISABLE_GETOPTIONS */
 
 /* to disable Gopher */
 #define CURL_DISABLE_GOPHER 1
@@ -57,6 +63,9 @@
 
 /* disable mime API */
 /* #undef CURL_DISABLE_MIME */
+
+/* to disable MQTT */
+#define CURL_DISABLE_MQTT 1
 
 /* disable netrc parsing */
 /* #undef CURL_DISABLE_NETRC */
@@ -88,6 +97,9 @@
 /* to disable SMTP */
 #define CURL_DISABLE_SMTP 1
 
+/* to disable socketpair support */
+/* #undef CURL_DISABLE_SOCKETPAIR */
+
 /* to disable TELNET */
 #define CURL_DISABLE_TELNET 1
 
@@ -97,11 +109,8 @@
 /* to disable verbose strings */
 /* #undef CURL_DISABLE_VERBOSE_STRINGS */
 
-/* to enable MQTT */
-/* #undef CURL_ENABLE_MQTT */
-
 /* Definition to make a library symbol externally visible. */
-#define CURL_EXTERN_SYMBOL __attribute__ ((__visibility__ ("default")))
+#define CURL_EXTERN_SYMBOL 
 
 /* IP address type in sockaddr */
 #define CURL_SA_FAMILY_T sa_family_t
@@ -325,6 +334,9 @@
 
 /* if you have MIT Kerberos */
 /* #undef HAVE_GSSMIT */
+
+/* Define to 1 if you have the <hyper.h> header file. */
+/* #undef HAVE_HYPER_H */
 
 /* Define to 1 if you have the <idn2.h> header file. */
 /* #undef HAVE_IDN2_H */
@@ -563,7 +575,7 @@
 /* #undef HAVE_QUICHE_H */
 
 /* Define to 1 if you have the `RAND_egd' function. */
-#define HAVE_RAND_EGD 1
+/* #undef HAVE_RAND_EGD */
 
 /* Define to 1 if you have the recv function. */
 #define HAVE_RECV 1
@@ -634,8 +646,8 @@
 /* Define to 1 if you have the `SSLv2_client_method' function. */
 /* #undef HAVE_SSLV2_CLIENT_METHOD */
 
-/* Define to 1 if you have the `SSL_get_esni_status' function. */
-/* #undef HAVE_SSL_GET_ESNI_STATUS */
+/* Define to 1 if you have the `SSL_get_ech_status' function. */
+/* #undef HAVE_SSL_GET_ECH_STATUS */
 
 /* Define to 1 if you have the <ssl.h> header file. */
 /* #undef HAVE_SSL_H */
@@ -863,7 +875,7 @@
 #define PACKAGE "curl"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "a suitable curl mailing list: https://curl.haxx.se/mail/"
+#define PACKAGE_BUGREPORT "a suitable curl mailing list: https://curl.se/mail/"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "curl"
@@ -967,9 +979,6 @@
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #define TIME_WITH_SYS_TIME 1
 
-/* to enable alt-svc */
-/* #undef USE_ALTSVC */
-
 /* if AmiSSL is in use */
 /* #undef USE_AMISSL */
 
@@ -979,14 +988,20 @@
 /* if BearSSL is enabled */
 /* #undef USE_BEARSSL */
 
-/* if ESNI support is available */
-/* #undef USE_ESNI */
+/* if ECH support is available */
+/* #undef USE_ECH */
 
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */
 
 /* if GnuTLS uses nettle as crypto backend */
 /* #undef USE_GNUTLS_NETTLE */
+
+/* to enable HSTS */
+/* #undef USE_HSTS */
+
+/* if hyper is in use */
+/* #undef USE_HYPER */
 
 /* PSL support enabled */
 /* #undef USE_LIBPSL */
@@ -1052,7 +1067,7 @@
 /* #undef USE_THREADS_WIN32 */
 
 /* Use TLS-SRP authentication */
-/* #undef USE_TLS_SRP */
+#define USE_TLS_SRP 1
 
 /* Use Unix domain sockets */
 #define USE_UNIX_SOCKETS 1

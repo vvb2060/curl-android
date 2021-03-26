@@ -7,7 +7,7 @@ curl static library prefab for android
 Gradle:
 
 ```gradle
-implementation 'io.github.vvb2060.ndk:curl:7.72.0'
+implementation 'io.github.vvb2060.ndk:curl:7.75.0'
 ```
 
 This library is [Prefab](https://google.github.io/prefab/), so you will need to enable it in your project (Android Gradle Plugin 4.1+):
