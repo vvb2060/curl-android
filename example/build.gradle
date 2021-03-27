@@ -49,5 +49,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.vvb2060.ndk:curl:7.75.0'
+    implementation 'io.github.vvb2060.ndk:curl:7.75.0.1'
 }
