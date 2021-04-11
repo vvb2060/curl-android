@@ -21,11 +21,18 @@ jobs:
       with:
         java-version: '11'
     - name: Build with Gradle
-      run: ./gradlew :e:aR
-    - name: Upload build artifact
+      run: |
+        ./gradlew publishToMavenLocal
+        ./gradlew aR
+    - name: Upload app
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.os }}-artifact
+        name: ${{ matrix.os }}-app
         path: |
           curl/build/outputs
           example/build/outputs
+    - name: Upload library
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.os }}-library
+        path: ~/.m2

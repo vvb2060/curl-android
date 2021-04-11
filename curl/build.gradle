@@ -1,17 +1,18 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    ndkVersion '21.4.7075529'
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName '7.75.0.1'
-        ndkVersion '21.3.6528147'
+        versionName '7.75.0'
         externalNativeBuild {
             ndkBuild {
                 arguments "-j${Runtime.runtime.availableProcessors()}"
@@ -32,6 +33,7 @@ android {
 
     buildFeatures {
         buildConfig false
+        prefab true
         prefabPublishing true
     }
 
@@ -43,5 +45,90 @@ android {
         curl_static {
             headers "src/main/native/curl/include"
         }
+    }
+}
+
+dependencies {
+    api 'io.github.vvb2060.ndk:boringssl:2.1'
+}
+
+afterEvaluate {
+    android.libraryVariants.collect { variant ->
+        task("generate${variant.name.capitalize()}SourcesJar", type: Jar) {
+            from variant.javaCompileProvider.get().source
+            classifier 'sources'
+        }
+        task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+            if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+                options.addStringOption "-release", "8"
+            }
+            source variant.javaCompileProvider.get().source
+            classpath += variant.javaCompileProvider.get().classpath
+            classpath += files(android.getBootClasspath())
+            options {
+                failOnError false
+                encoding 'UTF-8'
+            }
+        }
+        task("generate${variant.name.capitalize()}JavadocJar", type: Jar) {
+            dependsOn "generate${variant.name.capitalize()}Javadoc"
+            from tasks.getByName("generate${variant.name.capitalize()}Javadoc").destinationDir
+            classifier 'javadoc'
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            group 'io.github.vvb2060.ndk'
+            artifactId 'curl'
+            version android.defaultConfig.versionName
+            afterEvaluate {
+                from components.release
+                artifact generateReleaseJavadocJar
+                artifact generateReleaseSourcesJar
+            }
+            pom {
+                name = 'curl'
+                description = 'curl static library prefab for android.'
+                url = 'https://github.com/vvb2060/curl-android'
+                licenses {
+                    license {
+                        name = 'curl license'
+                        url = 'https://curl.se/docs/copyright.html'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'vvb2060'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/vvb2060/curl-android.git'
+                    url = 'https://github.com/vvb2060/curl-android'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name 'ossrh'
+            url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials(PasswordCredentials)
+        }
+    }
+}
+
+signing {
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    def secretKeyRingFile = findProperty("signing.secretKeyRingFile")
+
+    if (secretKeyRingFile != null && file(secretKeyRingFile).exists()) {
+        sign publishing.publications
+    } else if (signingKey != null) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications
     }
 }
