@@ -5,24 +5,18 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
-    ndkVersion '21.4.7075529'
+    compileSdkVersion 32
+    buildToolsVersion "32.0.0"
+    ndkVersion '23.1.7779620'
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName '7.75.0'
+        targetSdkVersion 32
+        versionCode 2
+        versionName '7.83.0'
         externalNativeBuild {
             ndkBuild {
                 arguments "-j${Runtime.runtime.availableProcessors()}"
             }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
         }
     }
 
@@ -46,36 +40,17 @@ android {
             headers "src/main/native/curl/include"
         }
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-    api 'io.github.vvb2060.ndk:boringssl:2.1'
-}
-
-afterEvaluate {
-    android.libraryVariants.collect { variant ->
-        task("generate${variant.name.capitalize()}SourcesJar", type: Jar) {
-            from variant.javaCompileProvider.get().source
-            classifier 'sources'
-        }
-        task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-            if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
-                options.addStringOption "-release", "8"
-            }
-            source variant.javaCompileProvider.get().source
-            classpath += variant.javaCompileProvider.get().classpath
-            classpath += files(android.getBootClasspath())
-            options {
-                failOnError false
-                encoding 'UTF-8'
-            }
-        }
-        task("generate${variant.name.capitalize()}JavadocJar", type: Jar) {
-            dependsOn "generate${variant.name.capitalize()}Javadoc"
-            from tasks.getByName("generate${variant.name.capitalize()}Javadoc").destinationDir
-            classifier 'javadoc'
-        }
-    }
+    api 'io.github.vvb2060.ndk:boringssl:3.0'
 }
 
 publishing {
@@ -86,8 +61,6 @@ publishing {
             version android.defaultConfig.versionName
             afterEvaluate {
                 from components.release
-                artifact generateReleaseJavadocJar
-                artifact generateReleaseSourcesJar
             }
             pom {
                 name = 'curl'
@@ -102,6 +75,7 @@ publishing {
                 developers {
                     developer {
                         name = 'vvb2060'
+                        url = 'https://github.com/vvb2060'
                     }
                 }
                 scm {
