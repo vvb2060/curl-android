@@ -1,6 +1,6 @@
 name: Build
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -12,27 +12,25 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
 
     steps:
-    - name: Check out
-      uses: actions/checkout@v2
-      with:
-        submodules: 'recursive'
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
-    - name: Build with Gradle
-      run: |
-        ./gradlew publishToMavenLocal
-        ./gradlew aR
-    - name: Upload app
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.os }}-app
-        path: |
-          curl/build/outputs
-          example/build/outputs
-    - name: Upload library
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.os }}-library
-        path: ~/.m2
+      - name: Check out
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - name: Build with Gradle
+        run: |
+          ./gradlew assemble
+          ./gradlew publishToMavenLocal
+      - name: Upload app
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-app
+          path: example/build/outputs
+      - name: Upload library
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-library
+          path: ~/.m2
