@@ -20,9 +20,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
+      - name: Copy version files
+        shell: bash
+        run: |
+          cp curl/src/main/native/config/versions/nghttp2ver.h curl/src/main/native/nghttp2/lib/includes/nghttp2/nghttp2ver.h
+          cp curl/src/main/native/config/versions/nghttp3ver.h curl/src/main/native/nghttp3/lib/includes/nghttp3/version.h
+          cp curl/src/main/native/config/versions/ngtcp2ver.h curl/src/main/native/ngtcp2/lib/includes/ngtcp2/version.h
       - name: Build with Gradle
         run: |
-          ./gradlew assemble
+          ./gradlew :e:assemble
           ./gradlew publishToMavenLocal
       - name: Upload app
         uses: actions/upload-artifact@v2

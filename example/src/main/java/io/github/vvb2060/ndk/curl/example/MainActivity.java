@@ -103,7 +103,6 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
         apkPath = getApplicationInfo().sourceDir;
         executor.submit(this::test32Bit);
-        append("\n");
         executor.submit(this::test64Bit);
     }
 }

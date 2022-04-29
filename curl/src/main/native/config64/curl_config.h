@@ -116,7 +116,7 @@
 /* #undef CURL_DISABLE_VERBOSE_STRINGS */
 
 /* Definition to make a library symbol externally visible. */
-#define CURL_EXTERN_SYMBOL 
+#define CURL_EXTERN_SYMBOL
 
 /* IP address type in sockaddr */
 #define CURL_SA_FAMILY_T sa_family_t
@@ -861,7 +861,7 @@
 #define RECV_TYPE_RETV ssize_t
 
 /* Define to the type qualifier of arg 5 for select. */
-#define SELECT_QUAL_ARG5 
+#define SELECT_QUAL_ARG5
 
 /* Define to the type of arg 1 for select. */
 #define SELECT_TYPE_ARG1 int
@@ -971,7 +971,7 @@
 /* #undef USE_MSH3 */
 
 /* if nghttp2 is in use */
-/* #undef USE_NGHTTP2 */
+#define USE_NGHTTP2 1
 
 /* if nghttp3 is in use */
 /* #undef USE_NGHTTP3 */

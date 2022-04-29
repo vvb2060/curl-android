@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 32
-        versionCode 2
-        versionName '7.83.0'
+        versionCode 3
+        versionName '7.83.0-h2'
         externalNativeBuild {
             ndkBuild {
                 arguments "-j${Runtime.runtime.availableProcessors()}"
@@ -38,6 +38,18 @@ android {
     prefab {
         curl_static {
             headers "src/main/native/curl/include"
+        }
+        nghttp2_static {
+            headers "src/main/native/nghttp2/lib/includes"
+        }
+        ngtcp2_static {
+            headers "src/main/native/ngtcp2/lib/includes"
+        }
+        ngtcp2_crypto_static {
+            headers "src/main/native/ngtcp2/crypto/includes"
+        }
+        nghttp3_static {
+            headers "src/main/native/nghttp3/lib/includes"
         }
     }
 

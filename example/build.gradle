@@ -21,7 +21,10 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled true
+            shrinkResources true
             signingConfig signingConfigs.debug
+            proguardFiles 'proguard-rules.pro'
         }
     }
 
@@ -47,5 +50,5 @@ android {
 }
 
 dependencies {
-    implementation 'io.github.vvb2060.ndk:curl:7.83.0'
+    implementation 'io.github.vvb2060.ndk:curl:7.83.0-h2'
 }

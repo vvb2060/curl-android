@@ -1,0 +1,8 @@
+#define HAVE_NETINET_IN_H 1
+#define HAVE_ARPA_INET_H 1
+#define HAVE_UNISTD_H 1
+#define HAVE_SYS_ENDIAN_H 1
+#define HAVE_ENDIAN_H 1
+#define HAVE_BYTESWAP_H 1
+#define HAVE_BE64TOH 1
+#define HAVE_BSWAP_64 1
