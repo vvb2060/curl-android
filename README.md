@@ -74,7 +74,7 @@ target_link_libraries(app curl::curl_static)
 ## Version
 
 **7.83.0-h3**
-- curl 7.83.0 -> master with [my patch](https://github.com/curl/curl/pull/8789)
+- curl 7.83.0 with [my patch](https://github.com/curl/curl/pull/8789)
 - nghttp2 1.47.0
 - nghttp3 0.4.0
 - ngtcp2 0.4.0
