@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         var path = apkPath + "!/lib/" + Build.SUPPORTED_32_BIT_ABIS[0] + "/libcurl.so";
         try {
             append("[ exec " + path + " ]");
-            startProcess("linker", path, "-v",
+            startProcess("linker", path,
                     "--http3", "https://www.cloudflare.com/cdn-cgi/trace");
         } catch (Exception e) {
             append(Log.getStackTraceString(e));
@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
         var path = apkPath + "!/lib/" + Build.SUPPORTED_64_BIT_ABIS[0] + "/libcurl.so";
         try {
             append("[ exec " + path + " ]");
-            startProcess("linker64", path, "-v",
+            startProcess("linker64", path,
                     "--http3", "https://www.cloudflare.com/cdn-cgi/trace");
         } catch (Exception e) {
             append(Log.getStackTraceString(e));
@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
         setContentView(buildView());
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
         apkPath = getApplicationInfo().sourceDir;
-        executor.submit(this::test32Bit);
+        //executor.submit(this::test32Bit);
         executor.submit(this::test64Bit);
     }
 }
