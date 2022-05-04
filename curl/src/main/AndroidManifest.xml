@@ -3,6 +3,4 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.vvb2060.ndk.curl">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>
