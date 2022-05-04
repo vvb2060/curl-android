@@ -974,10 +974,10 @@
 #define USE_NGHTTP2 1
 
 /* if nghttp3 is in use */
-/* #undef USE_NGHTTP3 */
+#define USE_NGHTTP3 1
 
 /* if ngtcp2 is in use */
-/* #undef USE_NGTCP2 */
+#define USE_NGTCP2 1
 
 /* if ngtcp2_crypto_gnutls is in use */
 /* #undef USE_NGTCP2_CRYPTO_GNUTLS */
