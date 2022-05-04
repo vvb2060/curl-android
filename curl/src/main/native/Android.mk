@@ -1,6 +1,26 @@
 LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
+include $(LOCAL_PATH)/curl/src/Makefile.inc
+LOCAL_MODULE            := curl
+LOCAL_SRC_FILES         := $(addprefix curl/src/,$(CURL_CFILES))
+LOCAL_SRC_FILES         += $(addprefix curl/src/,$(CURLX_CFILES))
+LOCAL_C_INCLUDES        := $(LOCAL_PATH)/curl/lib
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config32
+else ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
+else ifeq ($(TARGET_ARCH_ABI),x86)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config32
+else ifeq ($(TARGET_ARCH_ABI),x86_64)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
+endif
+LOCAL_CFLAGS            := -DHAVE_CONFIG_H
+LOCAL_STATIC_LIBRARIES  := curl_static
+LOCAL_LDFLAGS           := -fPIE
+include $(LOCAL_PATH)/build-executable.mk
+
+include $(CLEAR_VARS)
 include $(LOCAL_PATH)/curl/lib/Makefile.inc
 LOCAL_MODULE            := curl_static
 LOCAL_SRC_FILES         := $(addprefix curl/lib/,$(CSOURCES))

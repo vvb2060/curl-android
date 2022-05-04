@@ -75,10 +75,11 @@ public class MainActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.M)
     private void test32Bit() {
         if (Build.SUPPORTED_32_BIT_ABIS.length == 0) return;
-        var path = apkPath + "!/lib/" + Build.SUPPORTED_32_BIT_ABIS[0] + "/libvvb2060.so";
+        var path = apkPath + "!/lib/" + Build.SUPPORTED_32_BIT_ABIS[0] + "/libcurl.so";
         try {
             append("[ exec " + path + " ]");
-            startProcess("linker", path);
+            startProcess("linker", path, "-v",
+                    "--http3", "https://www.cloudflare.com/cdn-cgi/trace");
         } catch (Exception e) {
             append(Log.getStackTraceString(e));
         }
@@ -87,10 +88,11 @@ public class MainActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.M)
     private void test64Bit() {
         if (Build.SUPPORTED_64_BIT_ABIS.length == 0) return;
-        var path = apkPath + "!/lib/" + Build.SUPPORTED_64_BIT_ABIS[0] + "/libvvb2060.so";
+        var path = apkPath + "!/lib/" + Build.SUPPORTED_64_BIT_ABIS[0] + "/libcurl.so";
         try {
             append("[ exec " + path + " ]");
-            startProcess("linker64", path);
+            startProcess("linker64", path, "-v",
+                    "--http3", "https://www.cloudflare.com/cdn-cgi/trace");
         } catch (Exception e) {
             append(Log.getStackTraceString(e));
         }

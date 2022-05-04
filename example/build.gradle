@@ -50,5 +50,5 @@ android {
 }
 
 dependencies {
-    implementation 'io.github.vvb2060.ndk:curl:7.83.0-h2'
+    implementation 'io.github.vvb2060.ndk:boringssl:3.0'
 }
