@@ -11,8 +11,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 33
-        versionCode 3
-        versionName '7.84.0'
+        versionName '7.85.0'
         externalNativeBuild {
             ndkBuild {
                 arguments "-j${Runtime.runtime.availableProcessors()}"

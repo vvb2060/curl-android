@@ -20,7 +20,7 @@ If you only want to use curl tool, unzip example apk, extract `libcurl.so` and r
 Gradle:
 
 ```gradle
-implementation 'io.github.vvb2060.ndk:curl:7.84.0'
+implementation 'io.github.vvb2060.ndk:curl:7.85.0'
 ```
 
 This library is [Prefab](https://google.github.io/prefab/), so you will need to enable it in your project (Android Gradle Plugin 4.1+):
@@ -72,6 +72,12 @@ target_link_libraries(app curl::curl_static)
 ```
 
 ## Version
+
+**7.85.0**
+- curl 7.85.0
+- nghttp2 1.49.0
+- nghttp3 0.7.0
+- ngtcp2 0.8.0
 
 **7.84.0**
 - curl 7.84.0 with [my patch](https://github.com/curl/curl/pull/9056)
