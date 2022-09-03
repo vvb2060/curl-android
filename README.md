@@ -4,9 +4,9 @@ curl tool and libcurl static library prefab for android.
 
 Supports SSL, powered by [BoringSSL](https://github.com/vvb2060/BoringSSL_Android).
 
-Supports HTTP/2. powered by [nghttp2](https://github.com/nghttp2/nghttp2).
+Supports HTTP/2, powered by [nghttp2](https://github.com/nghttp2/nghttp2).
 
-Supports HTTP/3. powered by BoringSSL backend [ngtcp2](https://github.com/ngtcp2/ngtcp2) and [nghttp3](https://github.com/ngtcp2/nghttp3).
+Supports HTTP/3, powered by BoringSSL backend [ngtcp2](https://github.com/ngtcp2/ngtcp2) and [nghttp3](https://github.com/ngtcp2/nghttp3).
 
 No other protocols supported.
 
@@ -20,7 +20,7 @@ If you only want to use curl tool, unzip example apk, extract `libcurl.so` and r
 Gradle:
 
 ```gradle
-implementation 'io.github.vvb2060.ndk:curl:7.85.0'
+implementation 'io.github.vvb2060.ndk:curl:7.85.1'
 ```
 
 This library is [Prefab](https://google.github.io/prefab/), so you will need to enable it in your project (Android Gradle Plugin 4.1+):
@@ -73,30 +73,37 @@ target_link_libraries(app curl::curl_static)
 
 ## Version
 
-**7.85.0**
+### 7.85.1
 - curl 7.85.0
 - nghttp2 1.49.0
 - nghttp3 0.7.0
 - ngtcp2 0.8.0
 
-**7.84.0**
+### 7.85.0
+**aar file upload failed, please use 7.85.1**
+- curl 7.85.0
+- nghttp2 1.49.0
+- nghttp3 0.7.0
+- ngtcp2 0.8.0
+
+### 7.84.0
 - curl 7.84.0 with [my patch](https://github.com/curl/curl/pull/9056)
 - nghttp2 1.48.0
 - nghttp3 0.5.0
 - ngtcp2 0.6.0
 
-**7.83.0-h3**
+### 7.83.0-h3
 - curl 7.83.0 with [my patch](https://github.com/curl/curl/pull/8789)
 - nghttp2 1.47.0
 - nghttp3 0.4.0
 - ngtcp2 0.4.0
 
-**7.83.0-h2**
+### 7.83.0-h2
 - curl 7.83.0
 - nghttp2 1.47.0
 
-**7.83.0**
+### 7.83.0
 - curl 7.83.0
 
-**7.75.0**
+### 7.75.0
 - curl 7.75.0
