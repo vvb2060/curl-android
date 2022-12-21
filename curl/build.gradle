@@ -6,7 +6,7 @@ plugins {
 
 android {
     compileSdkVersion 33
-    buildToolsVersion "33.0.0"
+    buildToolsVersion "33.0.1"
     ndkVersion "25.1.8937393"
     namespace "io.github.vvb2060.ndk.curl"
     defaultConfig {
@@ -69,7 +69,7 @@ publishing {
         mavenJava(MavenPublication) {
             group 'io.github.vvb2060.ndk'
             artifactId 'curl'
-            version '7.86.0'
+            version '7.87.0'
             afterEvaluate {
                 from components.release
             }
