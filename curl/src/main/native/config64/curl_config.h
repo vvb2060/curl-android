@@ -439,16 +439,16 @@
 #define HAVE_NET_IF_H 1
 
 /* Define to 1 if you have the <nghttp2/nghttp2.h> header file. */
-/* #undef HAVE_NGHTTP2_NGHTTP2_H */
+#define HAVE_NGHTTP2_NGHTTP2_H 1
 
 /* Define to 1 if you have the <nghttp3/nghttp3.h> header file. */
-/* #undef HAVE_NGHTTP3_NGHTTP3_H */
+#define HAVE_NGHTTP3_NGHTTP3_H 1
 
 /* Define to 1 if you have the <ngtcp2/ngtcp2_crypto.h> header file. */
-/* #undef HAVE_NGTCP2_NGTCP2_CRYPTO_H */
+#define HAVE_NGTCP2_NGTCP2_CRYPTO_H 1
 
 /* Define to 1 if you have the <ngtcp2/ngtcp2.h> header file. */
-/* #undef HAVE_NGTCP2_NGTCP2_H */
+#define HAVE_NGTCP2_NGTCP2_H 1
 
 /* if you have an old MIT Kerberos version, lacking GSS_C_NT_HOSTBASED_SERVICE
    */
@@ -580,6 +580,9 @@
 
 /* Define to 1 if you have the <ssl.h> header file. */
 /* #undef HAVE_SSL_H */
+
+/* Define to 1 if you have the `SSL_set0_wbio' function. */
+#define HAVE_SSL_SET0_WBIO 1
 
 /* Define to 1 if you have the <stdatomic.h> header file. */
 #define HAVE_STDATOMIC_H 1
@@ -792,7 +795,7 @@
 #define PACKAGE_VERSION "-"
 
 /* a suitable file to read random data from */
-/* #undef RANDOM_FILE */
+#define RANDOM_FILE "/dev/urandom"
 
 /* Size of curl_off_t in number of bytes */
 #define SIZEOF_CURL_OFF_T 8
@@ -914,7 +917,7 @@
 #define USE_UNIX_SOCKETS 1
 
 /* enable websockets support */
-/* #undef USE_WEBSOCKETS */
+#define USE_WEBSOCKETS 1
 
 /* Define to 1 if you are building a Windows target with crypto API support.
    */
