@@ -6,8 +6,8 @@ plugins {
 
 android {
     compileSdkVersion 33
-    buildToolsVersion "33.0.1"
-    ndkVersion "25.1.8937393"
+    buildToolsVersion "33.0.2"
+    ndkVersion "25.2.9519653"
     namespace "io.github.vvb2060.ndk.curl"
     defaultConfig {
         minSdkVersion 19
@@ -61,7 +61,7 @@ android {
 }
 
 dependencies {
-    api 'io.github.vvb2060.ndk:boringssl:3.0'
+    api 'io.github.vvb2060.ndk:boringssl:3.1'
 }
 
 publishing {
@@ -69,7 +69,7 @@ publishing {
         mavenJava(MavenPublication) {
             group 'io.github.vvb2060.ndk'
             artifactId 'curl'
-            version '7.87.0'
+            version '7.88.1'
             afterEvaluate {
                 from components.release
             }
