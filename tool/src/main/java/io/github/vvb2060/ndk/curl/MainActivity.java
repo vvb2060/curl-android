@@ -1,4 +1,4 @@
-package io.github.vvb2060.ndk.curl.example;
+package io.github.vvb2060.ndk.curl;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -132,5 +132,11 @@ public class MainActivity extends Activity {
         apkPath = getApplicationInfo().sourceDir;
         editText.setText("--http3 https://www.cloudflare.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executor.shutdownNow();
     }
 }

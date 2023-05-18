@@ -30,7 +30,7 @@ jobs:
           echo "#include \"tool_hugehelp.h\"" > curl/src/main/native/curl/src/tool_hugehelp.c
       - name: Build with Gradle
         run: |
-          ./gradlew :e:assembleRelease
+          ./gradlew :t:assembleRelease
           ./gradlew publishToMavenLocal
       - name: Upload app
         uses: actions/upload-artifact@v3

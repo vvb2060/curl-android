@@ -13,14 +13,14 @@ No other protocols supported.
 By default, use system built-in CA certificate store, and use system built-in DNS.
 
 
-If you only want to use curl tool, unzip example apk, extract `libcurl.so` and rename it to `curl`.
+If you only want to use curl tool, unzip apk, extract `libcurl.so` and rename it to `curl`.
 
 ## Integration
 
 Gradle:
 
 ```gradle
-implementation 'io.github.vvb2060.ndk:curl:8.0.1'
+implementation 'io.github.vvb2060.ndk:curl:8.1.0'
 ```
 
 This library is [Prefab](https://google.github.io/prefab/), so you will need to enable it in your project (Android Gradle Plugin 4.1+):
@@ -30,7 +30,7 @@ android {
     ...
     buildFeatures {
         ...
-        prefab true
+        prefab = true
     }
 }
 ```
@@ -72,6 +72,12 @@ target_link_libraries(app curl::curl_static)
 ```
 
 ## Version
+
+### 8.1.0
+- curl 8.1.0
+- nghttp2 1.53.0
+- nghttp3 0.11.0
+- ngtcp2 0.15.0
 
 ### 8.0.1
 - curl 8.0.1

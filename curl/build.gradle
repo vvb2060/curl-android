@@ -1,54 +1,59 @@
 plugins {
-    id 'com.android.library'
-    id 'maven-publish'
-    id 'signing'
+    id("com.android.library")
+    id("maven-publish")
+    id("signing")
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
-    ndkVersion "25.2.9519653"
-    namespace "io.github.vvb2060.ndk.curl"
+    compileSdk = 33
+    buildToolsVersion = "33.0.2"
+    ndkVersion = "25.2.9519653"
+    namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 33
+        minSdk = 19
+        targetSdk = 33
         externalNativeBuild {
             ndkBuild {
-                arguments "-j${Runtime.runtime.availableProcessors()}"
+                targets += "curl_static"
+                targets += "nghttp2_static"
+                targets += "nghttp3_static"
+                targets += "ngtcp2_crypto_static"
+                targets += "ngtcp2_static"
+                arguments += "-j${Runtime.runtime.availableProcessors()}"
             }
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
-        buildConfig false
-        prefab true
-        prefabPublishing true
+        buildConfig = false
+        prefab = true
+        prefabPublishing = true
     }
 
     externalNativeBuild {
-        ndkBuild.path 'src/main/native/Android.mk'
+        ndkBuild.path = "src/main/native/Android.mk"
     }
 
     prefab {
         curl_static {
-            headers "src/main/native/curl/include"
+            headers = "src/main/native/curl/include"
         }
         nghttp2_static {
-            headers "src/main/native/nghttp2/lib/includes"
+            headers = "src/main/native/nghttp2/lib/includes"
         }
         ngtcp2_static {
-            headers "src/main/native/ngtcp2/lib/includes"
+            headers = "src/main/native/ngtcp2/lib/includes"
         }
         ngtcp2_crypto_static {
-            headers "src/main/native/ngtcp2/crypto/includes"
+            headers = "src/main/native/ngtcp2/crypto/includes"
         }
         nghttp3_static {
-            headers "src/main/native/nghttp3/lib/includes"
+            headers = "src/main/native/nghttp3/lib/includes"
         }
     }
 
@@ -61,45 +66,45 @@ android {
 }
 
 dependencies {
-    api 'io.github.vvb2060.ndk:boringssl:3.1'
+    api("io.github.vvb2060.ndk:boringssl:3.1")
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            group 'io.github.vvb2060.ndk'
-            artifactId 'curl'
-            version '8.0.1'
+            group = "io.github.vvb2060.ndk"
+            artifactId = "curl"
+            version = "8.1.0"
             afterEvaluate {
-                from components.release
+                from(components.release)
             }
             pom {
-                name = 'curl'
-                description = 'curl static library prefab for android.'
+                name = "curl"
+                description = "curl static library prefab for android."
                 url = 'https://github.com/vvb2060/curl-android'
                 licenses {
                     license {
-                        name = 'curl license'
+                        name = "curl license"
                         url = 'https://curl.se/docs/copyright.html'
                     }
                 }
                 developers {
                     developer {
-                        name = 'vvb2060'
-                        url = 'https://github.com/vvb2060'
+                        name = "vvb2060"
+                        url = "https://github.com/vvb2060"
                     }
                 }
                 scm {
-                    connection = 'scm:git:https://github.com/vvb2060/curl-android.git'
-                    url = 'https://github.com/vvb2060/curl-android'
+                    connection = "scm:git:https://github.com/vvb2060/curl-android.git"
+                    url = "https://github.com/vvb2060/curl-android"
                 }
             }
         }
     }
     repositories {
         maven {
-            name 'ossrh'
-            url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            name = "ossrh"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             credentials(PasswordCredentials)
         }
     }
@@ -111,9 +116,9 @@ signing {
     def secretKeyRingFile = findProperty("signing.secretKeyRingFile")
 
     if (secretKeyRingFile != null && file(secretKeyRingFile).exists()) {
-        sign publishing.publications
+        sign(publishing.publications)
     } else if (signingKey != null) {
         useInMemoryPgpKeys(signingKey, signingPassword)
-        sign publishing.publications
+        sign(publishing.publications)
     }
 }
