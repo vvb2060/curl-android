@@ -154,6 +154,9 @@
 /* Define to 1 if you have _Atomic support. */
 #define HAVE_ATOMIC 1
 
+/* Define to 1 if using AWS-LC. */
+/* #undef HAVE_AWSLC */
+
 /* Define to 1 if you have the basename function. */
 #define HAVE_BASENAME 1
 
@@ -802,6 +805,9 @@
 
 /* Size of curl_off_t in number of bytes */
 #define SIZEOF_CURL_OFF_T 8
+
+/* Size of curl_socket_t in number of bytes */
+#define SIZEOF_CURL_SOCKET_T 4
 
 /* Size of int in number of bytes */
 #define SIZEOF_INT 4
