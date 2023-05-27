@@ -74,7 +74,7 @@ publishing {
         mavenJava(MavenPublication) {
             group = "io.github.vvb2060.ndk"
             artifactId = "curl"
-            version = "8.1.0"
+            version = "8.1.1"
             afterEvaluate {
                 from(components.release)
             }
