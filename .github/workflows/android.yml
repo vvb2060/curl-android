@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.os }}-app
-          path: example/build/outputs
+          path: tool/build/outputs
       - name: Upload library
         uses: actions/upload-artifact@v3
         with:

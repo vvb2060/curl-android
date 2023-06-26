@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return;
         apkPath = getApplicationInfo().sourceDir;
         editText.setText("--http3 https://www.cloudflare.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
