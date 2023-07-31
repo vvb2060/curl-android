@@ -178,6 +178,10 @@
 /* Define to 1 if you have the clock_gettime function and monotonic timer. */
 #define HAVE_CLOCK_GETTIME_MONOTONIC 1
 
+/* Define to 1 if you have the clock_gettime function and raw monotonic timer.
+   */
+#define HAVE_CLOCK_GETTIME_MONOTONIC_RAW 1
+
 /* Define to 1 if you have the closesocket function. */
 /* #undef HAVE_CLOSESOCKET */
 
@@ -362,6 +366,9 @@
 
 /* Define to 1 if you have the ldap.h header file. */
 /* #undef HAVE_LDAP_H */
+
+/* Define to 1 if you have the `ldap_init_fd' function. */
+/* #undef HAVE_LDAP_INIT_FD */
 
 /* Use LDAPS implementation */
 #define HAVE_LDAP_SSL 1
@@ -722,9 +729,6 @@
 /* Define to 1 if you have the windows.h header file. */
 /* #undef HAVE_WINDOWS_H */
 
-/* Define to 1 if you have the winldap.h header file. */
-/* #undef HAVE_WINLDAP_H */
-
 /* Define to 1 if you have the winsock2.h header file. */
 /* #undef HAVE_WINSOCK2_H */
 
@@ -886,7 +890,7 @@
 /* if ngtcp2_crypto_gnutls is in use */
 /* #undef USE_NGTCP2_CRYPTO_GNUTLS */
 
-/* if ngtcp2_crypto_openssl is in use */
+/* if ngtcp2_crypto_quictls is in use */
 #define USE_NGTCP2_CRYPTO_OPENSSL 1
 
 /* if ngtcp2_crypto_wolfssl is in use */
