@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     private ScrollView scrollView;
     private TextView textView;
     private EditText editText;
+    private Future<?> future;
 
     @SuppressWarnings("SameParameterValue")
     private int dp2px(float dp) {
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
                 var text = v.getText().toString();
                 if (text.isEmpty()) return true;
                 textView.setText("");
-                executor.submit(() -> {
+                future = executor.submit(() -> {
                     var st = new StringTokenizer(text);
                     var cmd = new ArrayList<String>();
                     while (st.hasMoreTokens()) {
@@ -72,6 +73,11 @@ public class MainActivity extends Activity {
                 return true;
             }
             return false;
+        });
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && future != null) {
+                future.cancel(true);
+            }
         });
         rootView.addView(editText, editParams);
 
@@ -105,6 +111,11 @@ public class MainActivity extends Activity {
             String line = br.readLine();
             while (line != null) {
                 append(line);
+                if (Thread.interrupted()) {
+                    process.destroy();
+                    append("[ kill ]");
+                    break;
+                }
                 line = br.readLine();
             }
         }
