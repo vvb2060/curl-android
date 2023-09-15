@@ -20,12 +20,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.zip.ZipFile;
 
 public class MainActivity extends Activity {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -52,7 +57,7 @@ public class MainActivity extends Activity {
         editText.setOnEditorActionListener((v, actionId, event) -> {
             if (event == null) return false;
             if (event.getAction() == KeyEvent.ACTION_DOWN &&
-                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                 var text = v.getText().toString();
                 if (text.isEmpty()) return true;
                 textView.setText("");
@@ -106,8 +111,8 @@ public class MainActivity extends Activity {
         append("[ exit " + process.waitFor() + " ]");
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void execCurl(List<String> command) {
+    @TargetApi(Build.VERSION_CODES.Q)
+    private void execCurlLinker(List<String> command) {
         var is64Bit = Process.is64Bit();
         var abi = is64Bit ? Build.SUPPORTED_64_BIT_ABIS[0] : Build.SUPPORTED_32_BIT_ABIS[0];
         var path = apkPath + "!/lib/" + abi + "/libcurl.so";
@@ -123,14 +128,52 @@ public class MainActivity extends Activity {
         }
     }
 
+    private boolean copyCurl(File curl) {
+        if (curl.canExecute()) return true;
+        try (var apk = new ZipFile(apkPath)) {
+            var so = apk.getEntry("lib/" + Build.SUPPORTED_ABIS[0] + "/libcurl.so");
+            assert so != null;
+            try (var in = apk.getInputStream(so); var out = new FileOutputStream(curl)) {
+                var buffer = new byte[8192];
+                for (var n = in.read(buffer); n >= 0; n = in.read(buffer))
+                    out.write(buffer, 0, n);
+            }
+            return curl.setExecutable(true);
+        } catch (IOException e) {
+            append(Log.getStackTraceString(e));
+            return false;
+        }
+    }
+
+    private void execCurlFile(List<String> command) {
+        var curl = new File(getCodeCacheDir(), "curl");
+        if (!copyCurl(curl)) return;
+        try {
+            append("[ exec " + curl + " ]");
+            var cmd = new ArrayList<String>();
+            cmd.add(curl.toString());
+            cmd.addAll(command);
+            startProcess(cmd);
+        } catch (Exception e) {
+            append(Log.getStackTraceString(e));
+        }
+    }
+
+    private void execCurl(List<String> command) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            execCurlLinker(command);
+        } else {
+            execCurlFile(command);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return;
         apkPath = getApplicationInfo().sourceDir;
-        editText.setText("--http3 https://www.cloudflare.com/cdn-cgi/trace");
+        editText.setText("--http3-only https://www.cloudflare.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 
