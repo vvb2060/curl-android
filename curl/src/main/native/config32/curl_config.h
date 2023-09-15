@@ -19,20 +19,35 @@
 /* disable alt-svc */
 /* #undef CURL_DISABLE_ALTSVC */
 
+/* to disable AWS sig support */
+/* #undef CURL_DISABLE_AWS */
+
+/* to disable basic authentication */
+/* #undef CURL_DISABLE_BASIC_AUTH */
+
+/* to disable bearer authentication */
+/* #undef CURL_DISABLE_BEARER_AUTH */
+
+/* disable local binding support */
+/* #undef CURL_DISABLE_BINDLOCAL */
+
 /* to disable cookies support */
 /* #undef CURL_DISABLE_COOKIES */
 
-/* to disable cryptographic authentication */
-/* #undef CURL_DISABLE_CRYPTO_AUTH */
-
 /* to disable DICT */
 /* #undef CURL_DISABLE_DICT */
+
+/* to disable digest authentication */
+/* #undef CURL_DISABLE_DIGEST_AUTH */
 
 /* disable DoH */
 /* #undef CURL_DISABLE_DOH */
 
 /* to disable FILE */
 /* #undef CURL_DISABLE_FILE */
+
+/* disable form API */
+/* #undef CURL_DISABLE_FORM_API */
 
 /* to disable FTP */
 /* #undef CURL_DISABLE_FTP */
@@ -58,6 +73,9 @@
 /* to disable IMAP */
 /* #undef CURL_DISABLE_IMAP */
 
+/* to disable kerberos authentication */
+/* #undef CURL_DISABLE_KERBEROS_AUTH */
+
 /* to disable LDAP */
 #define CURL_DISABLE_LDAP 1
 
@@ -72,6 +90,9 @@
 
 /* to disable MQTT */
 /* #undef CURL_DISABLE_MQTT */
+
+/* to disable negotiate authentication */
+/* #undef CURL_DISABLE_NEGOTIATE_AUTH */
 
 /* disable netrc parsing */
 /* #undef CURL_DISABLE_NETRC */
@@ -129,9 +150,6 @@
 
 /* enable debug build options */
 /* #undef DEBUGBUILD */
-
-/* your Entropy Gathering Daemon socket pathname */
-/* #undef EGD_SOCKET */
 
 /* Define if you want to enable IPv6 support */
 #define ENABLE_IPV6 1
@@ -498,9 +516,6 @@
 /* Define to 1 if you have the `pipe' function. */
 #define HAVE_PIPE 1
 
-/* if you have the PK11_CreateManagedGenericObject function */
-/* #undef HAVE_PK11_CREATEMANAGEDGENERICOBJECT */
-
 /* If you have a fine poll */
 #define HAVE_POLL_FINE 1
 
@@ -524,9 +539,6 @@
 
 /* Define to 1 if you have the <quiche.h> header file. */
 /* #undef HAVE_QUICHE_H */
-
-/* Define to 1 if you have the `RAND_egd' function. */
-#define HAVE_RAND_EGD 1
 
 /* Define to 1 if you have the recv function. */
 #define HAVE_RECV 1
@@ -565,7 +577,7 @@
 #define HAVE_SIGINTERRUPT 1
 
 /* Define to 1 if you have the signal function. */
-/* #undef HAVE_SIGNAL */
+#define HAVE_SIGNAL 1
 
 /* Define to 1 if you have the <signal.h> header file. */
 #define HAVE_SIGNAL_H 1
@@ -722,9 +734,6 @@
 
 /* Define to 1 if compiler supports old gcc variadic macro style. */
 #define HAVE_VARIADIC_MACROS_GCC 1
-
-/* Define to 1 if you have the wincrypt.h header file. */
-/* #undef HAVE_WINCRYPT_H */
 
 /* Define to 1 if you have the windows.h header file. */
 /* #undef HAVE_WINDOWS_H */
@@ -895,9 +904,6 @@
 
 /* if ngtcp2_crypto_wolfssl is in use */
 /* #undef USE_NGTCP2_CRYPTO_WOLFSSL */
-
-/* if NSS is enabled */
-/* #undef USE_NSS */
 
 /* Use OpenLDAP-specific code */
 /* #undef USE_OPENLDAP */
