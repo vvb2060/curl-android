@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
         textView.setPadding(dp8, dp8, dp8, dp8);
         textView.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL));
         textView.setTextIsSelectable(true);
+        textView.requestFocus();
         scrollView.addView(textView, textParams);
 
         return rootView;
@@ -107,7 +108,7 @@ public class MainActivity extends Activity {
     private void startProcess(List<String> command) throws Exception {
         var process = new ProcessBuilder(command).redirectErrorStream(true).start();
         var reader = new InputStreamReader(process.getInputStream());
-        try (BufferedReader br = new BufferedReader(reader)) {
+        try (var br = new BufferedReader(reader)) {
             String line = br.readLine();
             while (line != null) {
                 append(line);
