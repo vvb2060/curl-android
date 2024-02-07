@@ -66,7 +66,7 @@ android {
 }
 
 dependencies {
-    api("io.github.vvb2060.ndk:boringssl:3.1")
+    api("io.github.vvb2060.ndk:boringssl:4.0")
 }
 
 publishing {
@@ -74,7 +74,7 @@ publishing {
         mavenJava(MavenPublication) {
             group = "io.github.vvb2060.ndk"
             artifactId = "curl"
-            version = "8.5.0"
+            version = "8.6.0"
             afterEvaluate {
                 from(components.release)
             }
