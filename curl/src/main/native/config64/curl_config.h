@@ -837,8 +837,11 @@
 /* if BearSSL is enabled */
 /* #undef USE_BEARSSL */
 
+/* Define to 1 to query for HTTPSRR when using DoH */
+#define USE_HTTPSRR 1
+
 /* if ECH support is available */
-/* #undef USE_ECH */
+#define USE_ECH 1
 
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */
