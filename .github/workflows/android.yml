@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+        os: [ ubuntu-latest ]
 
     steps:
       - name: Check out
@@ -42,15 +42,10 @@ jobs:
           echo '84831b9409646a918e30573bab4c9c91346d8abd' > $ANDROID_SDK_ROOT/licenses/android-sdk-preview-license
       - name: Build with Gradle
         run: |
-          ./gradlew :t:assembleRelease
-          ./gradlew publishToMavenLocal
+          ./gradlew :t:assembleDebug
+
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-app
           path: tool/build/outputs
-      - name: Upload library
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.os }}-library
-          path: ~/.m2
