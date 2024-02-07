@@ -324,12 +324,6 @@
 /* if you have GNU GSS */
 /* #undef HAVE_GSSGNU */
 
-/* if you have Heimdal */
-/* #undef HAVE_GSSHEIMDAL */
-
-/* if you have MIT Kerberos */
-/* #undef HAVE_GSSMIT */
-
 /* Define to 1 if you have the <hyper.h> header file. */
 /* #undef HAVE_HYPER_H */
 
@@ -494,6 +488,9 @@
 /* Define to 1 if you have the <openssl/pem.h> header file. */
 #define HAVE_OPENSSL_PEM_H 1
 
+/* if you have the functions OSSL_QUIC_client_method */
+/* #undef HAVE_OPENSSL_QUIC */
+
 /* Define to 1 if you have the <openssl/rsa.h> header file. */
 #define HAVE_OPENSSL_RSA_H 1
 
@@ -602,6 +599,10 @@
 
 /* Define to 1 if you have the `SSL_set0_wbio' function. */
 #define HAVE_SSL_SET0_WBIO 1
+
+/* Define to 1 if you have the `SSL_set_quic_use_legacy_codepoint' function.
+   */
+#define HAVE_SSL_SET_QUIC_USE_LEGACY_CODEPOINT 1
 
 /* Define to 1 if you have the <stdatomic.h> header file. */
 #define HAVE_STDATOMIC_H 1
@@ -723,12 +724,6 @@
 /* Define to 1 if you have the <utime.h> header file. */
 #define HAVE_UTIME_H 1
 
-/* Define to 1 if you have the windows.h header file. */
-/* #undef HAVE_WINDOWS_H */
-
-/* Define to 1 if you have the winsock2.h header file. */
-/* #undef HAVE_WINSOCK2_H */
-
 /* Define to 1 if you have the <wolfssh/ssh.h> header file. */
 /* #undef HAVE_WOLFSSH_SSH_H */
 
@@ -746,9 +741,6 @@
 
 /* Define this symbol if your OS supports changing the contents of argv */
 /* #undef HAVE_WRITABLE_ARGV */
-
-/* Define to 1 if you have the ws2tcpip.h header file. */
-/* #undef HAVE_WS2TCPIP_H */
 
 /* Define to 1 if you have the <x509.h> header file. */
 /* #undef HAVE_X509_H */
@@ -887,20 +879,32 @@
 /* if ngtcp2 is in use */
 #define USE_NGTCP2 1
 
+/* if ngtcp2_crypto_boringssl is in use */
+#define USE_NGTCP2_CRYPTO_BORINGSSL 1
+
 /* if ngtcp2_crypto_gnutls is in use */
 /* #undef USE_NGTCP2_CRYPTO_GNUTLS */
 
 /* if ngtcp2_crypto_quictls is in use */
-#define USE_NGTCP2_CRYPTO_QUICTLS 1
+/* #undef USE_NGTCP2_CRYPTO_QUICTLS */
 
 /* if ngtcp2_crypto_wolfssl is in use */
 /* #undef USE_NGTCP2_CRYPTO_WOLFSSL */
+
+/* if ngtcp2 + nghttp3 is in use */
+#define USE_NGTCP2_H3 1
 
 /* Use OpenLDAP-specific code */
 /* #undef USE_OPENLDAP */
 
 /* if OpenSSL is in use */
 #define USE_OPENSSL 1
+
+/* if openssl quic + nghttp3 is in use */
+/* #undef USE_OPENSSL_H3 */
+
+/* if openssl QUIC is in use */
+/* #undef USE_OPENSSL_QUIC */
 
 /* if quiche is in use */
 /* #undef USE_QUICHE */
