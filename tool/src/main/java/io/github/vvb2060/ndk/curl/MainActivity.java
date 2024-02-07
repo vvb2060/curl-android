@@ -185,7 +185,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
         apkPath = getApplicationInfo().sourceDir;
-        editText.setText("--http3-only https://www.cloudflare.com/cdn-cgi/trace");
+        editText.setText("--http3-only --curves X25519Kyber https://www.cloudflare.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 
