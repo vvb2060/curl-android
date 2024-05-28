@@ -72,7 +72,7 @@ target_link_libraries(app curl::curl_static)
 ## Version
 
 ### 8.8.0
-- curl 8.8.0
+- curl 8.8.0 with [my patch](https://github.com/curl/curl/pull/13816)
 - nghttp2 1.62.1
 - nghttp3 1.3.0
 - ngtcp2 1.5.0
