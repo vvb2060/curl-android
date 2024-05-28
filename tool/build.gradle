@@ -5,7 +5,7 @@ plugins {
 android {
     compileSdk = 34
     buildToolsVersion = "34.0.0"
-    ndkVersion = "26.1.10909125"
+    ndkVersion = "27.0.11718014"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         applicationId = "io.github.vvb2060.ndk.curl"
@@ -24,6 +24,7 @@ android {
         release {
             minifyEnabled = true
             shrinkResources = true
+            vcsInfo.include = false
             signingConfig = signingConfigs.debug
             proguardFiles("proguard-rules.pro")
         }
