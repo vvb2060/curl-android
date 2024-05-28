@@ -1,6 +1,9 @@
 /* lib/curl_config.h.  Generated from curl_config.h.in by configure.  */
 /* lib/curl_config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Ignore c-ares deprecation warnings */
+/* #undef CARES_NO_DEPRECATED */
+
 /* to enable curl debug memory tracking */
 /* #undef CURLDEBUG */
 
@@ -151,11 +154,8 @@
 /* enable debug build options */
 /* #undef DEBUGBUILD */
 
-/* Define if you want to enable IPv6 support */
-#define ENABLE_IPV6 1
-
 /* Define to the type of arg 2 for gethostname. */
-#define GETHOSTNAME_TYPE_ARG2 unsigned int
+#define GETHOSTNAME_TYPE_ARG2 size_t
 
 /* Define to 1 if you have the alarm function. */
 #define HAVE_ALARM 1
@@ -209,6 +209,9 @@
 
 /* "Set if getpwuid_r() declaration is missing" */
 /* #undef HAVE_DECL_GETPWUID_R_MISSING */
+
+/* if you have <dirent.h> */
+#define HAVE_DIRENT_H 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
@@ -397,6 +400,9 @@
 /* Define to 1 if you have the `idn2' library (-lidn2). */
 /* #undef HAVE_LIBIDN2 */
 
+/* Define to 1 if you have the <libpsl.h> header file. */
+/* #undef HAVE_LIBPSL_H */
+
 /* Define to 1 if using libressl. */
 /* #undef HAVE_LIBRESSL */
 
@@ -475,6 +481,9 @@
 /* if you have an old MIT Kerberos version, lacking GSS_C_NT_HOSTBASED_SERVICE
    */
 /* #undef HAVE_OLD_GSSMIT */
+
+/* if you have opendir */
+#define HAVE_OPENDIR 1
 
 /* Define to 1 if using OpenSSL 3 or later. */
 /* #undef HAVE_OPENSSL3 */
@@ -591,14 +600,17 @@
 /* Define to 1 if you have the <socket.h> header file. */
 /* #undef HAVE_SOCKET_H */
 
-/* Define to 1 if you have the `SSL_get_ech_status' function. */
-/* #undef HAVE_SSL_GET_ECH_STATUS */
+/* Define to 1 if you have the `SSL_ech_set1_echconfig' function. */
+/* #undef HAVE_SSL_ECH_SET1_ECHCONFIG */
 
 /* Define to 1 if you have the <ssl.h> header file. */
 /* #undef HAVE_SSL_H */
 
 /* Define to 1 if you have the `SSL_set0_wbio' function. */
 #define HAVE_SSL_SET0_WBIO 1
+
+/* Define to 1 if you have the `SSL_set1_ech_config_list' function. */
+/* #undef HAVE_SSL_SET1_ECH_CONFIG_LIST */
 
 /* Define to 1 if you have the `SSL_set_quic_use_legacy_codepoint' function.
    */
@@ -727,6 +739,9 @@
 /* Define to 1 if you have the <wolfssh/ssh.h> header file. */
 /* #undef HAVE_WOLFSSH_SSH_H */
 
+/* Define to 1 if you have the `wolfSSL_CTX_GenerateEchConfig' function. */
+/* #undef HAVE_WOLFSSL_CTX_GENERATEECHCONFIG */
+
 /* if you have wolfSSL_DES_ecb_encrypt */
 /* #undef HAVE_WOLFSSL_DES_ECB_ENCRYPT */
 
@@ -765,12 +780,6 @@
 
 /* Define to 1 if _THREAD_SAFE preprocessor symbol must be defined. */
 /* #undef NEED_THREAD_SAFE */
-
-/* Define to enable NTLM delegation to winbind's ntlm_auth helper. */
-/* #undef NTLM_WB_ENABLED */
-
-/* Define absolute filename for winbind's ntlm_auth helper. */
-/* #undef NTLM_WB_FILE */
 
 /* cpu-machine-OS */
 #define OS "unknown-linux-android"
@@ -838,7 +847,7 @@
 /* #undef USE_BEARSSL */
 
 /* if ECH support is available */
-/* #undef USE_ECH */
+#define USE_ECH 1
 
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */
@@ -846,10 +855,16 @@
 /* GSASL support enabled */
 /* #undef USE_GSASL */
 
+/* force HTTPS RR support for ECH */
+#define USE_HTTPSRR 1
+
 /* if hyper is in use */
 /* #undef USE_HYPER */
 
-/* PSL support enabled */
+/* Define if you want to enable IPv6 support */
+#define USE_IPV6 1
+
+/* if libpsl is in use */
 /* #undef USE_LIBPSL */
 
 /* if librtmp is in use */
@@ -979,12 +994,6 @@
 
 /* Type to use in place of in_addr_t when system does not provide it. */
 /* #undef in_addr_t */
-
-/* Define to `__inline__' or `__inline' if that's what the C compiler
-   calls it, or to nothing if 'inline' is not supported under any name.  */
-#ifndef __cplusplus
-/* #undef inline */
-#endif
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
