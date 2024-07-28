@@ -219,6 +219,9 @@
 /* Define to 1 if you have the <err.h> header file. */
 /* #undef HAVE_ERR_H */
 
+/* Define to 1 if you have the `eventfd' function. */
+#define HAVE_EVENTFD 1
+
 /* Define to 1 if you have the fcntl function. */
 #define HAVE_FCNTL 1
 
@@ -403,7 +406,7 @@
 /* Define to 1 if you have the <libpsl.h> header file. */
 /* #undef HAVE_LIBPSL_H */
 
-/* Define to 1 if using libressl. */
+/* Define to 1 if using LibreSSL. */
 /* #undef HAVE_LIBRESSL */
 
 /* Define to 1 if you have the <librtmp/rtmp.h> header file. */
@@ -670,6 +673,9 @@
 /* Define to 1 if suseconds_t is an available type. */
 #define HAVE_SUSECONDS_T 1
 
+/* Define to 1 if you have the <sys/eventfd.h> header file. */
+#define HAVE_SYS_EVENTFD_H 1
+
 /* Define to 1 if you have the <sys/filio.h> header file. */
 /* #undef HAVE_SYS_FILIO_H */
 
@@ -870,10 +876,10 @@
 /* if librtmp is in use */
 /* #undef USE_LIBRTMP */
 
-/* if libSSH is in use */
+/* if libssh is in use */
 /* #undef USE_LIBSSH */
 
-/* if libSSH2 is in use */
+/* if libssh2 is in use */
 /* #undef USE_LIBSSH2 */
 
 /* If you want to build curl with the built-in manual */
