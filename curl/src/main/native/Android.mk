@@ -14,10 +14,11 @@ else ifeq ($(TARGET_ARCH_ABI),x86)
     LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config32
 else ifeq ($(TARGET_ARCH_ABI),x86_64)
     LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
+else ifeq ($(TARGET_ARCH_ABI),riscv64)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
 endif
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H
 LOCAL_STATIC_LIBRARIES  := curl_static
-LOCAL_LDFLAGS           := -fPIE
 include $(LOCAL_PATH)/build-executable.mk
 
 include $(CLEAR_VARS)
@@ -33,13 +34,13 @@ else ifeq ($(TARGET_ARCH_ABI),x86)
     LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config32
 else ifeq ($(TARGET_ARCH_ABI),x86_64)
     LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
+else ifeq ($(TARGET_ARCH_ABI),riscv64)
+    LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config64
 endif
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/curl/include
 LOCAL_EXPORT_LDLIBS     := -lz
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H -DBUILDING_LIBCURL
 LOCAL_STATIC_LIBRARIES  := ssl_static nghttp2_static nghttp3_static ngtcp2_static
-# https://gist.github.com/vvb2060/56d5b8fda2553f36938b2b72b1390114/f8bb9882cbff921ba0dc643e5d15beb93b87700e
-STATIC_LIBRARY_STRIP    := true
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -50,7 +51,6 @@ LOCAL_C_INCLUDES        := $(LOCAL_PATH)/nghttp2/lib/includes
 LOCAL_C_INCLUDES        += $(LOCAL_PATH)/config
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/nghttp2/lib/includes
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H
-STATIC_LIBRARY_STRIP    := true
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -62,7 +62,6 @@ LOCAL_C_INCLUDES        += $(LOCAL_PATH)/config
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ngtcp2/lib/includes
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H
 LOCAL_STATIC_LIBRARIES  := ngtcp2_crypto_static
-STATIC_LIBRARY_STRIP    := true
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -75,7 +74,6 @@ LOCAL_C_INCLUDES        += $(LOCAL_PATH)/config
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/ngtcp2/crypto/includes
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H
 LOCAL_STATIC_LIBRARIES  := ssl_static
-STATIC_LIBRARY_STRIP    := true
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -86,7 +84,6 @@ LOCAL_C_INCLUDES        := $(LOCAL_PATH)/nghttp3/lib/includes
 LOCAL_C_INCLUDES        += $(LOCAL_PATH)/config
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/nghttp3/lib/includes
 LOCAL_CFLAGS            := -DHAVE_CONFIG_H
-STATIC_LIBRARY_STRIP    := true
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,prefab/boringssl)

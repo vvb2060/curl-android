@@ -7,23 +7,19 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+    name: Build
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Check out
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
       - name: Copy version files
         shell: bash
         run: |
@@ -39,18 +35,25 @@ jobs:
           echo 'org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8' >> gradle.properties
           echo 'org.gradle.caching=true' >> gradle.properties
           echo 'org.gradle.parallel=true' >> gradle.properties
-          echo '84831b9409646a918e30573bab4c9c91346d8abd' > $ANDROID_SDK_ROOT/licenses/android-sdk-preview-license
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-home-cache-cleanup: true
       - name: Build with Gradle
         run: |
-          ./gradlew :t:assembleRelease
-          ./gradlew publishToMavenLocal
+          ./gradlew :t:assemble
+          ./gradlew :c:publishToMavenLocal
+          ./gradlew :c:publishToMavenLocal -PenableLTO=1
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-app
+          name: app
           path: tool/build/outputs
+          compression-level: 9
       - name: Upload library
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-library
+          name: library
           path: ~/.m2
+          compression-level: 9

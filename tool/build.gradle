@@ -3,20 +3,24 @@ plugins {
 }
 
 android {
-    compileSdk = 34
-    buildToolsVersion = "34.0.0"
-    ndkVersion = "27.0.11718014"
+    compileSdk = 35
+    buildToolsVersion = "35.0.0"
+    ndkVersion = "27.0.11902837"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         applicationId = "io.github.vvb2060.ndk.curl"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         externalNativeBuild {
             ndkBuild {
-                arguments += "-j${Runtime.runtime.availableProcessors()}"
+                arguments += [ "-j${Runtime.runtime.availableProcessors()}" ]
+                abiFilters += [ "x86", "x86_64", "armeabi-v7a", "arm64-v8a", "riscv64" ]
             }
+        }
+        ndk {
+            debugSymbolLevel = "FULL"
         }
     }
 
@@ -27,12 +31,17 @@ android {
             vcsInfo.include = false
             signingConfig = signingConfigs.debug
             proguardFiles("proguard-rules.pro")
+            externalNativeBuild {
+                ndkBuild {
+                    arguments += [ "enableLTO=1" ]
+                }
+            }
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -41,7 +50,15 @@ android {
     }
 
     externalNativeBuild {
-        ndkBuild.path = 'src/main/native/Android.mk'
+        ndkBuild.path = '../curl/src/main/native/Android.mk'
+    }
+
+    lint {
+        checkReleaseBuilds = false
+    }
+
+    dependenciesInfo {
+        includeInApk = false
     }
 
     packagingOptions {
@@ -52,5 +69,6 @@ android {
 }
 
 dependencies {
-    implementation("io.github.vvb2060.ndk:boringssl:4.0")
+    releaseImplementation("io.github.vvb2060.ndk:boringssl:4.1-lto-ndk27")
+    debugImplementation("io.github.vvb2060.ndk:boringssl:4.1")
 }

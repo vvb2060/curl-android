@@ -4,29 +4,29 @@ plugins {
     id("signing")
 }
 
+def enableLTO = providers.gradleProperty("enableLTO")
+
 android {
-    compileSdk = 34
-    buildToolsVersion = "34.0.0"
-    ndkVersion = "27.0.11718014"
+    compileSdk = 35
+    buildToolsVersion = "35.0.0"
+    ndkVersion = "27.0.11902837"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         externalNativeBuild {
             ndkBuild {
-                targets += "curl_static"
-                targets += "nghttp2_static"
-                targets += "nghttp3_static"
-                targets += "ngtcp2_crypto_static"
-                targets += "ngtcp2_static"
-                arguments += "-j${Runtime.runtime.availableProcessors()}"
+                targets += [ "curl_static", "nghttp2_static", "nghttp3_static", "ngtcp2_crypto_static", "ngtcp2_static" ]
+                arguments += [ "-j${Runtime.runtime.availableProcessors()}" ]
+                if (enableLTO.present) arguments += [ "enableLTO=1" ]
+                abiFilters += [ "x86", "x86_64", "armeabi-v7a", "arm64-v8a", "riscv64" ]
             }
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -66,7 +66,11 @@ android {
 }
 
 dependencies {
-    api("io.github.vvb2060.ndk:boringssl:4.0")
+    if (enableLTO.present) {
+        api("io.github.vvb2060.ndk:boringssl:4.1-lto-ndk27")
+    } else {
+        api("io.github.vvb2060.ndk:boringssl:4.1")
+    }
 }
 
 publishing {
@@ -74,7 +78,11 @@ publishing {
         mavenJava(MavenPublication) {
             group = "io.github.vvb2060.ndk"
             artifactId = "curl"
-            version = "8.8.0"
+            if (enableLTO.present) {
+                version = "8.9.1-lto-ndk27"
+            } else {
+                version = "8.9.1"
+            }
             afterEvaluate {
                 from(components.release)
             }
