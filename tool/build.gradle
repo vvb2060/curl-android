@@ -5,7 +5,7 @@ plugins {
 android {
     compileSdk = 35
     buildToolsVersion = "35.0.0"
-    ndkVersion = "27.0.11902837"
+    ndkVersion = "27.0.12077973"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         applicationId = "io.github.vvb2060.ndk.curl"
@@ -16,11 +16,11 @@ android {
         externalNativeBuild {
             ndkBuild {
                 arguments += [ "-j${Runtime.runtime.availableProcessors()}" ]
-                abiFilters += [ "x86", "x86_64", "armeabi-v7a", "arm64-v8a", "riscv64" ]
             }
         }
         ndk {
             debugSymbolLevel = "FULL"
+            abiFilters += [ "x86", "x86_64", "armeabi-v7a", "arm64-v8a", "riscv64" ]
         }
     }
 
@@ -69,6 +69,6 @@ android {
 }
 
 dependencies {
-    releaseImplementation("io.github.vvb2060.ndk:boringssl:4.1-lto-ndk27")
-    debugImplementation("io.github.vvb2060.ndk:boringssl:4.1")
+    releaseImplementation("io.github.vvb2060.ndk:boringssl:5.0-lto-ndk27")
+    debugImplementation("io.github.vvb2060.ndk:boringssl:5.0")
 }

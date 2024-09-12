@@ -9,7 +9,7 @@ def enableLTO = providers.gradleProperty("enableLTO")
 android {
     compileSdk = 35
     buildToolsVersion = "35.0.0"
-    ndkVersion = "27.0.11902837"
+    ndkVersion = "27.0.12077973"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         minSdk = 21
@@ -67,9 +67,9 @@ android {
 
 dependencies {
     if (enableLTO.present) {
-        api("io.github.vvb2060.ndk:boringssl:4.1-lto-ndk27")
+        api("io.github.vvb2060.ndk:boringssl:5.0-lto-ndk27")
     } else {
-        api("io.github.vvb2060.ndk:boringssl:4.1")
+        api("io.github.vvb2060.ndk:boringssl:5.0")
     }
 }
 
@@ -79,9 +79,9 @@ publishing {
             group = "io.github.vvb2060.ndk"
             artifactId = "curl"
             if (enableLTO.present) {
-                version = "8.9.1-lto-ndk27"
+                version = "8.10.0-lto-ndk27"
             } else {
-                version = "8.9.1"
+                version = "8.10.0"
             }
             afterEvaluate {
                 from(components.release)
