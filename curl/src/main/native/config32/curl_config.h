@@ -10,7 +10,7 @@
 /* Location of default ca bundle */
 /* #undef CURL_CA_BUNDLE */
 
-/* define "1" to use built in CA store of SSL library */
+/* define "1" to use built-in CA store of SSL library */
 /* #undef CURL_CA_FALLBACK */
 
 /* Location of default ca path */
@@ -121,6 +121,9 @@
 /* to disable RTSP */
 /* #undef CURL_DISABLE_RTSP */
 
+/* disable SHA-512/256 hash algorithm */
+/* #undef CURL_DISABLE_SHA512_256 */
+
 /* disable DNS shuffling */
 /* #undef CURL_DISABLE_SHUFFLE_DNS */
 
@@ -182,7 +185,7 @@
 /* #undef HAVE_BROTLI_DECODE_H */
 
 /* Define to 1 if you have the __builtin_available function. */
-#define HAVE_BUILTIN_AVAILABLE 1
+/* #undef HAVE_BUILTIN_AVAILABLE */
 
 /* Define to 1 if you have the clock_gettime function and monotonic timer. */
 #define HAVE_CLOCK_GETTIME_MONOTONIC 1
@@ -488,9 +491,6 @@
 /* if you have opendir */
 #define HAVE_OPENDIR 1
 
-/* Define to 1 if using OpenSSL 3 or later. */
-/* #undef HAVE_OPENSSL3 */
-
 /* Define to 1 if you have the <openssl/crypto.h> header file. */
 #define HAVE_OPENSSL_CRYPTO_H 1
 
@@ -499,9 +499,6 @@
 
 /* Define to 1 if you have the <openssl/pem.h> header file. */
 #define HAVE_OPENSSL_PEM_H 1
-
-/* if you have the functions OSSL_QUIC_client_method */
-/* #undef HAVE_OPENSSL_QUIC */
 
 /* Define to 1 if you have the <openssl/rsa.h> header file. */
 #define HAVE_OPENSSL_RSA_H 1
@@ -730,6 +727,9 @@
 /* Define this if time_t is unsigned */
 /* #undef HAVE_TIME_T_UNSIGNED */
 
+/* Define to 1 if you have the <unicode/uidna.h> header file. */
+/* #undef HAVE_UNICODE_UIDNA_H */
+
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
@@ -741,6 +741,9 @@
 
 /* Define to 1 if you have the <utime.h> header file. */
 #define HAVE_UTIME_H 1
+
+/* Define to 1 if you have the <uv.h> header file. */
+/* #undef HAVE_UV_H */
 
 /* Define to 1 if you have the <wolfssh/ssh.h> header file. */
 /* #undef HAVE_WOLFSSH_SSH_H */
@@ -811,9 +814,6 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "-"
 
-/* a suitable file to read random data from */
-#define RANDOM_FILE "/dev/urandom"
-
 /* Size of curl_off_t in number of bytes */
 #define SIZEOF_CURL_OFF_T 8
 
@@ -845,6 +845,9 @@
 
 /* if AmiSSL is in use */
 /* #undef USE_AMISSL */
+
+/* if AppleIDN */
+/* #undef USE_APPLE_IDN */
 
 /* Define to enable c-ares support */
 /* #undef USE_ARES */
@@ -882,8 +885,8 @@
 /* if libssh2 is in use */
 /* #undef USE_LIBSSH2 */
 
-/* If you want to build curl with the built-in manual */
-/* #undef USE_MANUAL */
+/* if libuv is in use */
+/* #undef USE_LIBUV */
 
 /* if mbedTLS is enabled */
 /* #undef USE_MBEDTLS */
@@ -930,7 +933,7 @@
 /* if quiche is in use */
 /* #undef USE_QUICHE */
 
-/* if rustls is enabled */
+/* if Rustls is enabled */
 /* #undef USE_RUSTLS */
 
 /* to enable Windows native SSL/TLS support */
@@ -951,7 +954,7 @@
 /* Use Unix domain sockets */
 #define USE_UNIX_SOCKETS 1
 
-/* enable websockets support */
+/* enable WebSockets support */
 #define USE_WEBSOCKETS 1
 
 /* Define to 1 if you are building a Windows target with crypto API support.
