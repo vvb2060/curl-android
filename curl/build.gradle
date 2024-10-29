@@ -67,9 +67,9 @@ android {
 
 dependencies {
     if (enableLTO.present) {
-        api("io.github.vvb2060.ndk:boringssl:5.0-lto-ndk27")
+        api("io.github.vvb2060.ndk:boringssl:20241024-lto-ndk27")
     } else {
-        api("io.github.vvb2060.ndk:boringssl:5.0")
+        api("io.github.vvb2060.ndk:boringssl:20241024")
     }
 }
 

@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -185,7 +186,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
         apkPath = getApplicationInfo().sourceDir;
-        editText.setText("--http3-only --curves X25519Kyber768Draft00 --ech true --doh-url https://1.0.0.1/dns-query https://cloudflare-ech.com/cdn-cgi/trace");
+        editText.setText("-s --http3-only --curves X25519MLKEM768 --ech true --doh-url https://1.1/dns-query https://" + UUID.randomUUID() + ".encryptedsni.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 

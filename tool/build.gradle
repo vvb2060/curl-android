@@ -69,6 +69,6 @@ android {
 }
 
 dependencies {
-    releaseImplementation("io.github.vvb2060.ndk:boringssl:5.0-lto-ndk27")
-    debugImplementation("io.github.vvb2060.ndk:boringssl:5.0")
+    releaseImplementation("io.github.vvb2060.ndk:boringssl:20241024-lto-ndk27")
+    debugImplementation("io.github.vvb2060.ndk:boringssl:20241024")
 }
