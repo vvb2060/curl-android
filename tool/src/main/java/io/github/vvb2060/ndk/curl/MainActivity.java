@@ -186,7 +186,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
         apkPath = getApplicationInfo().sourceDir;
-        editText.setText("-s --http3-only --curves X25519MLKEM768 --ech true --doh-url https://1.1/dns-query https://" + UUID.randomUUID() + ".encryptedsni.com/cdn-cgi/trace");
+        editText.setText("--compressed --http3-only --curves X25519MLKEM768 --ech true --doh-url https://1.1/dns-query https://" + UUID.randomUUID() + ".encryptedsni.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 

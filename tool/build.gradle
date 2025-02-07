@@ -4,8 +4,8 @@ plugins {
 
 android {
     compileSdk = 35
-    buildToolsVersion = "35.0.0"
-    ndkVersion = "27.0.12077973"
+    buildToolsVersion = "35.0.1"
+    ndkVersion = "28.0.12674087"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         applicationId = "io.github.vvb2060.ndk.curl"
@@ -69,6 +69,6 @@ android {
 }
 
 dependencies {
-    releaseImplementation("io.github.vvb2060.ndk:boringssl:20241024-lto-ndk27")
-    debugImplementation("io.github.vvb2060.ndk:boringssl:20241024")
+    releaseImplementation("io.github.vvb2060.ndk:boringssl:20250114-lto-ndk28")
+    debugImplementation("io.github.vvb2060.ndk:boringssl:20250114")
 }
