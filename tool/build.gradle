@@ -3,14 +3,9 @@ plugins {
 }
 
 android {
-    compileSdk = 35
-    buildToolsVersion = "35.0.1"
-    ndkVersion = "28.0.13004108"
     namespace = "io.github.vvb2060.ndk.curl"
     defaultConfig {
         applicationId = "io.github.vvb2060.ndk.curl"
-        minSdk = 21
-        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         externalNativeBuild {
@@ -69,6 +64,6 @@ android {
 }
 
 dependencies {
-    releaseImplementation("io.github.vvb2060.ndk:boringssl:20250114-lto-ndk28")
-    debugImplementation("io.github.vvb2060.ndk:boringssl:20250114")
+    releaseImplementation("io.github.vvb2060.ndk:boringssl:20251124-lto-ndk29")
+    debugImplementation("io.github.vvb2060.ndk:boringssl:20251124")
 }
