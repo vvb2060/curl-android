@@ -5,7 +5,7 @@ include $(LOCAL_PATH)/curl/src/Makefile.inc
 LOCAL_MODULE            := curl
 LOCAL_SRC_FILES         := $(addprefix curl/src/,$(CURL_CFILES))
 LOCAL_SRC_FILES         += $(addprefix curl/src/,$(CURLX_CFILES))
-LOCAL_SRC_FILES         += $(LOCAL_PATH)/tinynew.cpp
+LOCAL_HAS_CPP           := true
 LOCAL_C_INCLUDES        := $(LOCAL_PATH)/curl/lib
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_C_INCLUDES    += $(LOCAL_PATH)/config32
