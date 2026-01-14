@@ -107,7 +107,10 @@ public class MainActivity extends Activity {
     }
 
     private void startProcess(List<String> command) throws Exception {
-        var process = new ProcessBuilder(command).redirectErrorStream(true).start();
+        var process = new ProcessBuilder(command)
+                .directory(getExternalCacheDir())
+                .redirectErrorStream(true)
+                .start();
         var reader = new InputStreamReader(process.getInputStream());
         try (var br = new BufferedReader(reader)) {
             String line = br.readLine();
@@ -186,7 +189,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(buildView());
         apkPath = getApplicationInfo().sourceDir;
-        editText.setText("--compressed --http3-only --curves X25519MLKEM768 --ech true --doh-url https://1.1/dns-query https://" + UUID.randomUUID() + ".encryptedsni.com/cdn-cgi/trace");
+        editText.setText("-v --trace-config DNS --compressed --http3-only --curves X25519MLKEM768 --ech true --doh-url https://1dot1dot1dot1.cloudflare-dns.com/dns-query --resolve 1dot1dot1dot1.cloudflare-dns.com:443:104.16.249.249 https://" + UUID.randomUUID() + ".encryptedsni.com/cdn-cgi/trace");
         editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 
